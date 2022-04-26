@@ -14,15 +14,13 @@ const Shop = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch(
-      `https://ema-john-product.herokuapp.com/product?page=${page}&size=${size}`
-    )
+    fetch(`http://localhost:5000/product?page=${page}&size=${size}`)
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, [page, size]);
 
   useEffect(() => {
-    fetch("https://ema-john-product.herokuapp.com/productCount")
+    fetch("http://localhost:5000/productCount")
       .then((res) => res.json())
       .then((data) => {
         const count = data.count;

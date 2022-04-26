@@ -1,3 +1,5 @@
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import About from "./components/About/About";
@@ -13,6 +15,7 @@ import SignUp from "./components/SignUp/SignUp";
 function App() {
   return (
     <div>
+      <ToastContainer></ToastContainer>
       <Header></Header>
       <Routes>
         <Route path="/" element={<Shop></Shop>}></Route>

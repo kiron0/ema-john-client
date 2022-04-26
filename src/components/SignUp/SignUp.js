@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import Loading from '../Loading/Loading';
 
 const SignUp = () => {
     const [email, setEmail] = useState('');
@@ -10,7 +12,7 @@ const SignUp = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const [createUserWithEmailAndPassword, user] = useCreateUserWithEmailAndPassword(auth)
+    const [createUserWithEmailAndPassword, user, loading] = useCreateUserWithEmailAndPassword(auth)
 
     const handleEmailBlur = event =>{
         setEmail(event.target.value);
@@ -25,8 +27,11 @@ const SignUp = () => {
     }
 
     if(user){
-        navigate('/shop');
+        navigate('/');
     }
+    if (loading) {
+        return <Loading />;
+      }
 
     const handleCreateUser = event =>{
         event.preventDefault();
@@ -40,6 +45,7 @@ const SignUp = () => {
         }
         
         createUserWithEmailAndPassword(email, password);
+        toast('User Created Successfully!')
     }
 
     return (
